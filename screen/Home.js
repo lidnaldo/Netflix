@@ -70,10 +70,6 @@ const Home = (props) => {
     setMovies(data);
   }, []);
 
-  const user = props?.route?.params?.name;
-  console.log("usuario", user);
-
-
   return (
     <ProfileContext.Consumer>
       {({user, changeUser})=>{

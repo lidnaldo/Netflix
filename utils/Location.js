@@ -24,20 +24,22 @@ export const GetLocationPromise = () => {
 
 
 export const GetCountry = ({ lat, lng }) => {
-    
+
     return new Promise((resolve, reject) => {
-        Geocoder.geocodePosition({
-            lat,
-            lng
-        })
-        .then((location)=> {
-            resolve(location[7].countryCode)
-        })
-        .catch((error) => {
-            // console.log("GetCountry ERROR ", error);
-            reject(error)
+        Geocoder.geocodePosition(
+            { lat, lng }
+        ).then((location) => {
+            location.forEach(function(value) {
+                if(value.countryCode !== null){
+                    resolve(value.countryCode);
+                }
+    //         resolve(location[7].countryCode)
+            });
+            
+        }).catch((error) => {
+            console.log("GetCountry ERROR ", error);        reject(error);
         });
-    });
+    });       
 };
 
 
