@@ -12,7 +12,7 @@ import ProfileToEdit from './screen/ProfileToEdit';
 const Stack = createStackNavigator();
 
 const App = (props) => {
-  const [user, changeUser] = useState("Jose");
+  const [user, changeUser] = useState("José");
   console.log("user -- ", user);
   
   return (

@@ -70,17 +70,23 @@ const Home = (props) => {
     setMovies(data);
   }, []);
 
+  const user = props?.route?.params?.name;
+  console.log("usuario", user);
+
+
   return (
     <ProfileContext.Consumer>
       {({user, changeUser})=>{
 
-        let movieToResume = [];
-        if (user) {
-          const data = require("../assets/moviesToResume.json");
-          movieToResume = data[user];
-        }
+      let movieToResume = [];
+      if (user) {
+        const data = require("../assets/moviesToResume.json");
+        movieToResume = data[user];
+        console.log("movieToResume", movieToResume);
+      }
 
 
+        console.log ('usuario2', user)
         return (
           <>
           <StatusBar
