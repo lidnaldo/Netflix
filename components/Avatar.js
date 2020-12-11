@@ -1,7 +1,7 @@
+import { MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
-import {View} from 'react-native';
-import {MaterialIcons} from '@expo/vector-icons';
-import styled, {css} from 'styled-components/native';
+import { View } from 'react-native';
+import styled, { css } from 'styled-components/native';
 
 const Container = styled.TouchableOpacity`
   flex-direction: column;
@@ -51,7 +51,7 @@ const Editable = (props) => {
 };
 
 const Avatar = (props) => {
-  console.log('avatar', props);
+  // console.log('avatar', props);
   return (
     <Container style={{alignItems: 'center'}} onPress={props.onPress}>
       {props.uri ? (

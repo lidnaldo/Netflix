@@ -2,15 +2,14 @@
  * @format
  */
 
+import messaging from '@react-native-firebase/messaging';
 import { registerRootComponent } from 'expo';
 import App from './App';
-import messaging from '@react-native-firebase/messaging';
-import {AppRegistry} from 'react-native';
-import {name as appName} from './app.json'
 
 // Register background handler  --- https://rnfirebase.io/messaging/usage
 messaging().setBackgroundMessageHandler(async remoteMessage => {
-    console.log('Message handled in the background!', remoteMessage);
+    // console.log('Message handled in the background!', remoteMessage);
+    console.log('Message handled in the background!');
 });
 
 // AppRegistry.registerComponent(appName, () => App)

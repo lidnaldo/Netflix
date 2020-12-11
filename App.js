@@ -1,20 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import { Alert } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
-import Tabs from './routes/Tabs';
-import ProfileToEdit from './screen/ProfileToEdit';
-import ChooseIcon from './screen/ChooseIcon';
-import Camera from './screen/Camera'
+import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 import ProfileContext from './context/ProfileContext';
-
+import Tabs from './routes/Tabs';
+import Camera from './screen/Camera';
+import ChooseIcon from './screen/ChooseIcon';
+import ProfileToEdit from './screen/ProfileToEdit';
 
 const Stack = createStackNavigator();
 
-export default function App () {
+const App = (props) => {
+  const [user, changeUser] = useState("Jose");
+  console.log("user -- ", user);
+  
+  return (
+    <ProfileContext.Provider value={{user, changeUser}}>
+      <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Tabs" component={Tabs}  options={{headerShown: false}}/>
+            <Stack.Screen name="ProfileToEdit" component={ProfileToEdit} />
+            <Stack.Screen name="ChooseIcon" component={ChooseIcon} />
+            <Stack.Screen name="Camera" component={Camera} options={{headerShown: false}} />
+          </Stack.Navigator>
+      </NavigationContainer>
+    </ProfileContext.Provider>
 
+  )
+
+  
   useEffect(() => {
     messaging().onNotificationOpenedApp(remoteMessage => {
       Alert.alert(
@@ -31,17 +46,7 @@ export default function App () {
     return unsubscribe;
   }, []);
   
-  const [user, changeUser] = useState("Jose");
-  return (
-    <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Tabs" component={Tabs}  options={{headerShown: false}}/>
-          <Stack.Screen name="ProfileToEdit" component={ProfileToEdit} />
-          <Stack.Screen name="ChooseIcon" component={ChooseIcon} />
-          <Stack.Screen name="Camera" component={Camera} options={{headerShown: false}} />
-        </Stack.Navigator>
-
-  </NavigationContainer>
-
-  )
+  
 };
+
+export default App;

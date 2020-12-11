@@ -5,10 +5,8 @@ import styled from 'styled-components/native';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import Movies from '../components/Movies';
-import { GetLocation, GetCountry, GetLocationPromise } from '../utils/Location';
-import Geocoder from 'react-native-geocoder';
-import Geolocation from '@react-native-community/geolocation';
-
+import ProfileContext from '../context/ProfileContext';
+import { GetCountry, GetLocationPromise } from '../utils/Location';
 
 
 const Container = styled.ScrollView`
@@ -35,7 +33,7 @@ const Home = (props) => {
     // const location = GetLocationPromise();
     const location = GetLocationPromise()
       .then((info) => {
-        console.log("location OK ", info);
+        // console.log("location OK ", info);
         setPosition(info);
       })
       .catch((error) => {
@@ -72,45 +70,52 @@ const Home = (props) => {
     setMovies(data);
   }, []);
 
-  const user = props?.route?.params?.name;
-  console.log("user -- ", user);
-
-  let movieToResume = [];
-  if (user) {
-    const data = require("../assets/moviesToResume.json");
-    movieToResume = data[user];
-  }
-
   return (
-    <>
-      <StatusBar
-        translucent
-        backgroundColor="transparent"
-        barStyle="light-content"
-      />
-      <Container>
-        <Poster source={require('../assets/poster.jpg')}>
-          <Gradient
-            locations={[0, 0.2, 0.6, 0.93]}
-            colors={[
-              'rgba(0,0,0,0.5)',
-              'rgba(0,0,0,0.0)',
-              'rgba(0,0,0,0.0)',
-              'rgba(0,0,0,1)',
-            ]}>
-            <Header />
-            <Hero />
-          </Gradient>
-        </Poster>
-        <Movies
-          label={`Continuar assistindo ${user}`}
-          data={movieToResume} />
-        <Movies label="Nacionais" data={movies} />
-        {/* <Movies label="Nacionais" data={nationalMovies} /> */}
-        <Movies label="Recomendados" data={movies} />
-        <Movies label="Top 10" data={movies} />
-      </Container>
-    </>
+    <ProfileContext.Consumer>
+      {({user, changeUser})=>{
+
+        let movieToResume = [];
+        if (user) {
+          const data = require("../assets/moviesToResume.json");
+          movieToResume = data[user];
+        }
+
+
+        return (
+          <>
+          <StatusBar
+            translucent
+            backgroundColor="transparent"
+            barStyle="light-content"
+          />
+          <Container>
+            <Poster source={require('../assets/poster.jpg')}>
+              <Gradient
+                locations={[0, 0.2, 0.6, 0.93]}
+                colors={[
+                  'rgba(0,0,0,0.5)',
+                  'rgba(0,0,0,0.0)',
+                  'rgba(0,0,0,0.0)',
+                  'rgba(0,0,0,1)',
+                ]}>
+                <Header />
+                <Hero />
+              </Gradient>
+            </Poster>
+            <Movies
+              label={`Continuar assistindo ${user}`}
+              data={movieToResume} />
+            {/* <Movies label="Nacionais" data={movies} /> */}
+            <Movies label="Nacionais" data={nationalMovies} />
+            <Movies label="Recomendados" data={movies} />
+            <Movies label="Top 10" data={movies} />
+          </Container>
+        </>
+    
+        )
+      }}
+    </ProfileContext.Consumer>
+
   );
 };
 

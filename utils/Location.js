@@ -31,12 +31,10 @@ export const GetCountry = ({ lat, lng }) => {
             lng
         })
         .then((location)=> {
-            console.log("GetCountry OK ");
-            console.log("location[0].countryCode", location[0].countryCode);
-            resolve(location[0].countryCode)
+            resolve(location[7].countryCode)
         })
         .catch((error) => {
-            console.log("GetCountry ERROR ", error);
+            // console.log("GetCountry ERROR ", error);
             reject(error)
         });
     });
@@ -46,15 +44,15 @@ export const GetCountry = ({ lat, lng }) => {
 export const GetLocation = () => {
     /** obtendo localizacao ****************************************** */
     const onObtainPosition = (position) => {
-        console.log('position', position)
+        // console.log('position', position)
         // https://github.com/devfd/react-native-geocoder
         const pos = {
             lat: position.coords.latitude,
-            lng: position.coords.longitude
+            lng: position.coords.longituder
         };
         Geocoder.geocodePosition(pos).then(address => {  // res is an Array of geocoding object (see below)
             // Position Geocoding
-            console.log("Endereco:", address);
+            // console.log("Endereco:", address);
         })
             .catch(err => console.log(err))
     }

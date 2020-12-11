@@ -1,3 +1,5 @@
 import React from "react";
 
-export const ProfileContext = React.createContext(null);
+const ProfileContext = React.createContext(null);
+
+export default ProfileContext;

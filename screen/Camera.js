@@ -1,8 +1,8 @@
 'use strict';
-import React, {PureComponent} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, { PureComponent } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 // https://react-native-camera.github.io/react-native-camera/docs/rncamera
-import {RNCamera} from 'react-native-camera';
+import { RNCamera } from 'react-native-camera';
 
 
 export default class Camera extends PureComponent {
@@ -42,7 +42,7 @@ export default class Camera extends PureComponent {
             buttonNegative: 'Cancel',
           }}
           onGoogleVisionBarcodesDetected={({ barcodes }) => {
-            console.log(barcodes);
+            // console.log(barcodes);
           }}
         />
         <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
